@@ -1,0 +1,67 @@
+Sample Point,Sample Tube,Method,Date,Time,Sample Event
+1FAL,9,Sent for testing,11/03/2023,12:00:00,1
+1FAL,31,Sent for testing,11/03/2023,12:00:00,1
+2FAL,38,Sent for testing,11/03/2023,NA,2
+2FAL,42,Sent for testing,11/03/2023,NA,2
+3FAL,36,Sent for testing,11/03/2023,NA,3
+7FAL,28,Sent for testing,11/03/2023,12:00:00,4
+7FAL,44,Sent for testing,11/03/2023,12:00:00,4
+8FAL,27,Sent for testing,11/03/2023,12:00:00,5
+9FAL,16,Sent for testing,11/03/2023,12:00:00,6
+9FAL,24,Sent for testing,11/03/2023,12:00:00,6
+10FAL,1,Sent for testing,26/03/2023,14:00:00,7
+10FAL,2,Sent for testing,26/03/2023,14:00:00,7
+11FAL,6,Sent for testing,26/03/2023,14:00:00,8
+11FAL,39,Sent for testing,26/03/2023,14:00:00,8
+12FAL,23,Sent for testing,26/03/2023,14:00:00,9
+12FAL,49,Sent for testing,26/03/2023,14:00:00,9
+14FAL,14,Sent for testing,26/03/2023,14:00:00,10
+14FAL,41,Sent for testing,26/03/2023,14:00:00,10
+15FAL,11,Sent for testing,26/03/2023,14:00:00,11
+15FAL,43,Sent for testing,26/03/2023,14:00:00,11
+16FAL,3,Sent for testing,26/03/2023,14:00:00,12
+16FAL,37,Sent for testing,26/03/2023,14:00:00,12
+17FAL,25,Sent for testing,26/03/2023,14:00:00,13
+17FAL,34,Sent for testing,26/03/2023,14:00:00,13
+18FAL,8,Sent for testing,26/03/2023,14:00:00,18
+18FAL,40,Sent for testing,26/03/2023,14:00:00,18
+20FAL,7,Sent for testing,26/03/2023,14:00:00,19
+20FAL,21,Sent for testing,26/03/2023,14:00:00,19
+21FAL,12,Sent for testing,26/03/2023,14:00:00,20
+21FAL,13,Sent for testing,26/03/2023,14:00:00,20
+23FAL,33,Sent for testing,26/03/2023,14:00:00,21
+23FAL,35,Sent for testing,26/03/2023,14:00:00,21
+24FAL,45,Sent for testing,26/03/2023,14:00:00,22
+24FAL,48,Sent for testing,26/03/2023,14:00:00,22
+26FAL,10,Sent for testing,26/03/2023,14:00:00,23
+26FAL,18,Sent for testing,26/03/2023,14:00:00,23
+27FAL,26,Sent for testing,26/03/2023,14:00:00,24
+27FAL,46,Sent for testing,26/03/2023,14:00:00,24
+2FAL,4,Sent for testing,26/03/2023,14:00:00,25
+2FAL,20,Sent for testing,26/03/2023,14:00:00,25
+3FAL,5,Sent for testing,26/03/2023,14:00:00,26
+3FAL,22,Sent for testing,26/03/2023,14:00:00,26
+8FAL,19,Sent for testing,26/03/2023,14:00:00,27
+8FAL,32,Sent for testing,26/03/2023,14:00:00,27
+12FAL,47,Sent for testing,27/03/2023,16:00:00,28
+QMP,QMP1,Sent for testing,27/04/2023,16:00:00,38
+QMP,QMP2,Sent for testing,27/04/2023,16:00:00,38
+QMP,QMP3,Sent for testing,27/04/2023,16:00:00,38
+12FAL,52,Sent for testing,28/03/2023,15:00:00,29
+12FAL,57,Sent for testing,28/03/2023,15:00:00,29
+15FAL,53,Sent for testing,28/03/2023,15:00:00,30
+15FAL,58,Sent for testing,28/03/2023,15:00:00,30
+18FAL,55,Sent for testing,28/03/2023,15:00:00,31
+18FAL,56,Sent for testing,28/03/2023,15:00:00,31
+21FAL,50,Sent for testing,28/03/2023,15:00:00,32
+21FAL,54,Sent for testing,28/03/2023,15:00:00,32
+24FAL,29,Sent for testing,28/03/2023,15:00:00,33
+24FAL,62,Sent for testing,28/03/2023,15:00:00,33
+27FAL,51,Sent for testing,28/03/2023,15:00:00,34
+27FAL,59,Sent for testing,28/03/2023,15:00:00,34
+3Fal,60,Sent for testing,28/03/2023,4:15:00 PM,35
+3Fal,61,Sent for testing,28/03/2023,4:15:00 PM,35
+6Fal,65,Sent for testing,28/03/2023,4:25:00 PM,36
+6Fal,66,Sent for testing,28/03/2023,4:25:00 PM,36
+9Fal,63,Sent for testing,28/03/2023,4:20:00 PM,37
+9Fal,64,Sent for testing,28/03/2023,4:20:00 PM,37

@@ -1,0 +1,131 @@
+---
+title: "Elemental Water Sample results"
+author: "Ben Holt"
+date: "2023-06-07"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
+```
+
+## ICP OES (elemental) Results 
+
+Elemental results for seawater samples collected in Falmouth at various dates and site in early 2023. Results for the following elements:
+
+P	V	Cr	Mn	Fe	Co	Ni	Cu	Zn	As	Mo	Ag	Cd	Sb	Tl	Pb
+
+
+### Question 1: How do results vary amoung samples generally?
+
+Perform a PCA ordination to summarise sample variation. 
+
+```{r ordination1}
+
+#load in data
+
+water_sample_res <- read.csv("ICP OES (elemental) results 6th June 23.csv")
+str(water_sample_res)
+
+#extract numeric columns
+water_res <- water_sample_res[,unlist(lapply(water_sample_res, is.numeric)) ]
+
+#perform and plot PCA
+rownames(water_res) <- water_sample_res$Sample
+
+pca_res1 <- prcomp(water_res, scale. = TRUE)
+
+colour_by_type <- rep("Blue", nrow(water_res))
+colour_by_type[grep("Blank",water_sample_res$Sample)] <- "Red"
+colour_by_type[grep("Q",water_sample_res$Sample)] <- "Green"
+
+library(ggfortify)
+autoplot(pca_res1, label = T, colour = colour_by_type, loadings = TRUE, loadings.colour = 'grey',
+         loadings.label = TRUE, loadings.label.size = 3)
+
+```
+
+
+So the blanks seperate out fine. Sample 55 seems crazy, with very negative values for PC1 & PC2. Sample 50 is also quite out there with a highly negative value for PC2 - which suggests high Arsenic, Terbium and Antimony values.
+
+Let's remove the blanks and the crazy samples to have a closer look at the variation among the rest of the samples.
+
+```{r ordination2}
+water_res_sub1 <- water_res[-grep("Blank",rownames(water_res)),]
+water_res_sub1 <- water_res_sub1[!rownames(water_res_sub1) %in% c("50","55"),]
+
+pca_res2 <- prcomp(water_res_sub1, scale. = TRUE)
+
+colour_by_type <- rep("Blue", nrow(water_res_sub1))
+colour_by_type[grep("Q",rownames(water_res_sub1))] <- "Green"
+
+autoplot(pca_res2, label = T, colour = colour_by_type, loadings = TRUE, loadings.colour = 'grey',
+         loadings.label = TRUE, loadings.label.size = 3)
+
+
+
+
+```
+
+A more confusing picture. Still some unusual smaples (29 & 62). Other than that the results seem scattered. The three 'Queen Mary Pumping station', coloured in green are nested within the results for the other samples. These were the samples taken from as close as possible to the sewage outlet during a spill. They don't seem particularly associated with each other, suggesting little consistency between duplicate samples. Let's have a closer look at that.
+
+### Question 2: How consistent are duplicate samples?
+
+Let's have a look at whether duplicate samples tend to be closer together than non-duplicate samples in the above plot.
+
+```{r dupl_samp_check}
+
+samp_dist <- as.matrix(dist(pca_res2$x[,1:2]))
+
+rownames(samp_dist) <- rownames(water_res_sub1)
+colnames(samp_dist) <- rownames(water_res_sub1)
+
+##find duplicate sample scores
+#load meta data
+
+samp_meta <- read.csv("water sample metadata.csv")
+
+samp_meta <- subset(samp_meta, Sample.Tube %in% water_sample_res$Sample)
+
+#which sample events have duplicates?
+
+sample_evnt_sample_count <- table(samp_meta$Sample.Event)
+dup_sample_events <- names(sample_evnt_sample_count)[sample_evnt_sample_count > 1]
+
+#remove sample events for ignored samples
+
+rem_events <-  subset(samp_meta, Sample.Tube %in% c("50","55"))$Sample.Event
+
+dup_sample_events <- dup_sample_events[!dup_sample_events %in% rem_events]
+
+#loop through each sample event and extract duplicate and non-duplicate comparisions
+
+dup_res <- vector()
+non_dup_res <- vector()
+
+for (i in dup_sample_events) {
+  sample_event_samps <- subset(samp_meta, Sample.Event == i)$Sample.Tube
+  sample_event_samps_comparisons <-  as.vector(as.dist(samp_dist[sample_event_samps,sample_event_samps]))
+  
+  dup_res <- c(dup_res, sample_event_samps_comparisons)
+  
+  other_sample_event_samps_comparisons <- as.vector(samp_dist[sample_event_samps, !colnames(samp_dist) %in% sample_event_samps])
+  
+non_dup_res <- c(non_dup_res, other_sample_event_samps_comparisons)  
+}
+
+summary(dup_res)
+summary(non_dup_res)
+
+all_res <- c(dup_res, non_dup_res)
+all_lab <- rep("Non-duplicates", length(all_res))
+all_lab[1:length(dup_res)] <- "Duplicates"
+
+all_dat <- data.frame(Res = all_res, Label = all_lab)
+
+boxplot(Res ~ Label, data = all_dat, ylab = "Difference between samples")
+
+```
+
+This suggests that there is a lot of variation between duplicates but the biggest differences are between non-duplicates.
+
